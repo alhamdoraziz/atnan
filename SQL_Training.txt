@@ -1,0 +1,240 @@
+USE SQL_Training
+
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Customer_TM]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Customer_TM]
+GO
+CREATE TABLE [dbo].[58657Customer_TM](
+	Id_Customer int identity(1,1),
+	Nama_Customer VARCHAR(100),
+	Alamat VARCHAR(100),
+	Telepon int,
+	Email VARCHAR(100),
+	Sex VARCHAR(1)
+)
+
+--SELECT * FROM [dbo].[58657Customer_TM]
+--INSERT INTO [dbo].[58657Customer_TM]
+--SELECT 'Athma','Medan','0812','Athma@gmail.com','M' UNION ALL
+--SELECT 'Dennis','Jakarta','0822','Dennis@gmail.com','M' UNION ALL
+--SELECT 'Darul','Bandung','0832','Darul@gmail.com','M' UNION ALL
+--SELECT 'Aziz','Bandung','0842','Aziz@gmail.com','M' UNION ALL
+--SELECT 'Ayub','Jakarta','0852','Ayub@gmail.com','M'
+
+
+
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Product_TM]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Product_TM]
+GO
+CREATE TABLE [dbo].[58657Product_TM](
+	Id_product int IDENTITY(1,1),
+	Nama_product VARCHAR(100),
+	Description VARCHAR(10),
+	Harga_product int
+)
+
+
+--SELECT * FROM [dbo].[58657Product_TM]
+--INSERT INTO [dbo].[58657Product_TM]
+--SELECT 'Lifebuoy','sabun','50000' UNION ALL
+--SELECT 'daia','deterjen','55000' UNION ALL
+--SELECT 'nuvo','sabun','60000' UNION ALL
+--SELECT 'batang','sabun','70000' UNION ALL
+--SELECT 'dettol','sabun','90000'
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Invoice_TT]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Invoice_TT]
+GO
+CREATE TABLE [dbo].[58657Invoice_TT](
+	Id_invoice int IDENTITY(1,1),
+	Id_order int,
+	invoice_date VARCHAR(100)
+)
+
+--SELECT * FROM [dbo].[58657Invoice_TT]
+--INSERT INTO [dbo].[58657Invoice_TT]
+--SELECT '1','SENIN' UNION ALL
+--SELECT '2','SELASA' UNION ALL
+--SELECT '3','RABU' UNION ALL
+--SELECT '4','KAMIS' UNION ALL
+--SELECT '5','JUMAT'
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Order_TT]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Order_TT]
+GO
+CREATE TABLE [dbo].[58657Order_TT](
+	Id_order int identity(1,1),
+	Issue_date VARCHAR(100),
+	Fullfiled_date VARCHAR(100),
+	Status_order VARCHAR(100),
+	TnC VARCHAR(100),
+	Id_Customer int
+)
+
+--SELECT * FROM [dbo].[58657Order_TT]
+--INSERT INTO [dbo].[58657Order_TT]
+--SELECT 'SENIN','SELASA','COMPLETED','HARUS SAMPAI','1' UNION ALL
+--SELECT 'SELASA','RABU','COMPLETED','HARUS SAMPAI','2' UNION ALL
+--SELECT 'RABU','KAMIS','PENDING','HARUS SAMPAI','3' UNION ALL
+--SELECT 'KAMIS','JUMAT','COMPLETED','HARUS SAMPAI','4' UNION ALL
+--SELECT 'JUMAT','SABTU','PENDING','HARUS SAMPAI','5'
+
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657InvProd_TT]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657InvProd_TT]
+GO
+CREATE TABLE [dbo].[58657InvProd_TT](
+	Id_invprod int identity(1,1),
+	Id_invoice int,
+	Id_product int,
+	Quantity VARCHAR(100)
+)
+
+--SELECT * FROM [dbo].[58657InvProd_TT]
+--INSERT INTO [dbo].[58657InvProd_TT]
+--SELECT '1','1','20' UNION ALL
+--SELECT '2','2','30' UNION ALL
+--SELECT '3','3','40' UNION ALL
+--SELECT '4','4','50' UNION ALL
+--SELECT '5','5','60'
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Invoice_TH]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Invoice_TH]
+GO
+CREATE TABLE [dbo].[58657Invoice_TH](
+	Id_invoice int IDENTITY(1,1) PRIMARY KEY,
+	Id_order int,
+	invoice_date VARCHAR(100)
+)
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657Order_TH]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657Order_TH]
+GO
+CREATE TABLE [dbo].[58657Order_TH](
+	Id_order int,
+	Issue_date VARCHAR(100),
+	Fullfiled_date VARCHAR(100),
+	Status_order VARCHAR(100),
+	TnC VARCHAR(100),
+	Id_Customer int
+)
+
+
+IF EXISTS (SELECT * FROM sys.objects 
+WHERE object_id = OBJECT_ID(N'[dbo].[58657InvProd_TH]') AND type in (N'U')) 
+DROP TABLE [dbo].[58657InvProd_TH]
+GO
+CREATE TABLE [dbo].[58657InvProd_TH](
+	Id_invprod int,
+	Id_invoice int,
+	Id_product int,
+	Quantity VARCHAR(100)
+)
+
+
+CREATE VIEW [dbo].[58657Customer_TM_v]
+AS
+SELECT *
+FROM [dbo].[58657Customer_TM]
+
+CREATE VIEW [dbo].[58657Product_TM_v]
+AS
+SELECT *
+FROM [dbo].[58657Product_TM]
+
+CREATE VIEW [dbo].[58657Invoice_TT_v]
+AS
+SELECT *
+FROM [dbo].[58657Invoice_TT]
+
+CREATE VIEW [dbo].[58657Order_TT_v]
+AS
+SELECT *
+FROM [dbo].[58657Order_TT]
+
+CREATE VIEW [dbo].[58657InvProd_TT_v]
+AS
+SELECT *
+FROM [dbo].[58657InvProd_TT]
+
+--start
+CREATE VIEW [dbo].[58657ALLJoin_TT_v]
+AS
+SELECT a.Id_order , a.Issue_date, b.invoice_date, a.Fullfiled_date,a.Status_order,a.TnC, 
+c.Nama_Customer, a.Id_Customer,
+c.Alamat, c.Email, c.Sex, d.Nama_product
+
+FROM 
+[dbo].[58657Invoice_TT] b, 
+[dbo].[58657Order_TT] a, 
+[dbo].[58657Customer_TM] c, 
+[dbo].[58657Product_TM] d, 
+[dbo].[58657InvProd_TT] e
+
+WHERE a.Id_order = b.Id_order 
+AND a.Id_Customer = c.Id_Customer 
+AND e.Id_product = d.Id_product
+ AND e.Id_invoice = b.Id_invoice
+ 
+ DROP VIEW [dbo].[58657ALLJoin_TT_v]
+--end
+
+--CREATE VIEW [dbo].[58657ALLJoin2_TT_v]
+--AS
+--SELECT  a.Id_order , a.Issue_date, b.invoice_date, a.Fullfiled_date,a.Status_order,a.TnC, 
+--c.Nama_Customer,
+--c.Alamat, c.Email, c.Sex, d.Nama_product
+
+--	FROM [dbo].[58657Invoice_TT] AS b 
+--	JOIN [dbo].[58657Order_TT] AS a
+--	ON a.Id_order = b.Id_order 
+--	JOIN [dbo].[58657Customer_TT] AS c 
+--	ON a.Id_Customer = c.Id_Customer
+--	JOIN [dbo].[58657Product_TM] AS d
+--	ON d.Id_Customer = e.Id_Customer
+	
+-- JOIN
+--[dbo].[58657Customer_TM] c JOIN
+--[dbo].[58657Product_TM] d JOIN
+--[dbo].[58657InvProd_TT] e
+
+--ON a.Id_order = b.Id_order 
+--ON a.Id_Customer = c.Id_Customer 
+--AND e.Id_product = d.Id_product
+-- AND e.Id_invoice = b.Id_invoice
+
+
+SELECT * FROM [dbo].[58657ALLJoin_TT_v]
+
+DROP PROC [dbo].[58657DisplayCustomer_TT]
+
+CREATE PROC [dbo].[58657DisplayCustomer_TT]( @IdCustomer int=NULL )
+as begin
+	SET NOCOUNT ON
+	DECLARE @pcErrMessage varchar(200)
+	
+	BEGIN TRY  
+	SELECT * FROM [dbo].[58657ALLJoin_TT_v] 
+	WHERE Id_Customer = ISNULL (@IdCustomer,Id_Customer)
+	RETURN 0
+	END TRY
+
+	BEGIN CATCH
+	SET @pcErrMessage = ERROR_MESSAGE()
+	RAISERROR (@pcErrMessage,16,1)
+	RETURN 1
+	END CATCH
+
+end
+GO
+exec [dbo].[58657DisplayCustomer_TT] 
+
+
